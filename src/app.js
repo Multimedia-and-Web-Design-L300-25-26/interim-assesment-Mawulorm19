@@ -80,8 +80,18 @@ app.use((err, req, res, _next) => {
 // ─────────────────────────────────────────────────────────────────────────────
 //  Start server
 // ─────────────────────────────────────────────────────────────────────────────
-const PORT = process.env.PORT || 5001; // Use Render's port, fallback to 5001 for local dev
+async function startServer() {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log("Connected to MongoDB");
+    
+    app.listen(process.env.PORT || 5001, '0.0.0.0', () => {
+      console.log("Server is up!");
+    });
+  } catch (error) {
+    console.error("FATAL ERROR DURING STARTUP:", error.message);
+    process.exit(1); // This forces the error into the Render logs
+  }
+}
 
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-});
+startServer();
