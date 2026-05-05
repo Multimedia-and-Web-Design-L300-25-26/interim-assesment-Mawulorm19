@@ -85,4 +85,3 @@ const PORT = process.env.PORT || 5001; // Use Render's port, fallback to 5001 fo
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Server running on port ${PORT}`);
 });
-});
