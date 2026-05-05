@@ -80,7 +80,9 @@ app.use((err, req, res, _next) => {
 // ─────────────────────────────────────────────────────────────────────────────
 //  Start server
 // ─────────────────────────────────────────────────────────────────────────────
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => {
-  console.log(`🚀  Server running in ${process.env.NODE_ENV || 'development'} mode on port http://localhost:${PORT}`);
+const PORT = process.env.PORT || 5001; // Use Render's port, fallback to 5001 for local dev
+
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+});
 });
